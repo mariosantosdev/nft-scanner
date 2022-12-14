@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import { AbiItem } from "web3-utils";
+import { Contract } from "web3-eth-contract";
 
 interface useWeb3Props {
   contractABI: AbiItem | AbiItem[];
@@ -8,7 +9,7 @@ interface useWeb3Props {
 }
 
 export const useWeb3 = ({ contractABI, contractAddress }: useWeb3Props) => {
-  const [contract, setContract] = useState<any>(null);
+  const [contract, setContract] = useState<Contract | null>(null);
 
   useEffect(() => {
     const main = () => {
