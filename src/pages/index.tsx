@@ -34,7 +34,12 @@ export default function Home() {
             ))}
 
           {nfts.map((nft) => (
-            <NFTCard key={nft.id} image={nft.image} name={nft.name} />
+            <NFTCard
+              key={nft.id}
+              image={nft.image}
+              name={nft.name}
+              description={nft?.description}
+            />
           ))}
         </SimpleGrid>
       </Container>
