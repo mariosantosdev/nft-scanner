@@ -1,4 +1,4 @@
-import { Container, Flex, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { Container, Flex, SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import { FormSearch } from "~/components/FormSearch";
 
@@ -25,6 +25,9 @@ export default function Home() {
       <Container maxW="container.xl" px={4} my={12}>
         <FormSearch />
 
+        {nfts.length > 0 && !loading ? (
+          <Text mb={2}>Total de tokens: {nfts.length}</Text>
+        ) : null}
         <SimpleGrid as="ul" columns={{ base: 1, md: 3, lg: 4 }} gap={4}>
           {loading &&
             [...Array(8)].map((_, index) => (
