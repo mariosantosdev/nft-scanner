@@ -19,7 +19,8 @@
     "paths": {
       "~/components/*": ["./src/components/*"],
       "~/hooks/*": ["./src/hooks/*"],
-      "~/contracts/*": ["./src/contracts/*"]
+      "~/contracts/*": ["./src/contracts/*"],
+      "~/context/*": ["./src/context/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
