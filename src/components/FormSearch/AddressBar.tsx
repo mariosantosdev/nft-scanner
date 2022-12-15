@@ -1,8 +1,11 @@
 import { Input, InputProps } from "@chakra-ui/react";
+import { forwardRef } from "react";
 
-export const AddressBar: React.FC<InputProps> = (props) => {
-  return (
+// eslint-disable-next-line react/display-name
+export const AddressBar = forwardRef<HTMLInputElement, InputProps>(
+  (props, ref) => (
     <Input
+      ref={ref}
       type="search"
       placeholder="Enter the address of the wallet"
       w={{ base: 320, md: "full" }}
@@ -13,5 +16,5 @@ export const AddressBar: React.FC<InputProps> = (props) => {
       _focus={{ color: "white" }}
       {...props}
     />
-  );
-};
+  )
+);
