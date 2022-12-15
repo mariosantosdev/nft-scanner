@@ -5,7 +5,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import Web3 from "web3";
 import { AbiItem } from "web3-utils";
+import { toast } from "react-hot-toast";
 
 import animetas from "~/contracts/animetas.json";
 import { useWeb3 } from "~/hooks/useWeb3";
@@ -73,6 +75,9 @@ export const NftsProvider = ({ children }: NftsProviderProps) => {
         setNfts(list);
         resolve(list);
       } catch (error) {
+        toast.error(
+          "Error to get NFTs, do you are connected to the right network?"
+        );
         reject(error);
       } finally {
         setLoading(false);
@@ -81,9 +86,23 @@ export const NftsProvider = ({ children }: NftsProviderProps) => {
   };
 
   useEffect(() => {
-    if (window?.ethereum) {
-      window.ethereum;
-    }
+    const changeChain = async () => {
+      if (window?.ethereum) {
+        const app = new Web3(window.ethereum);
+        window.ethereum.enable();
+
+        const chainId = await app.eth.getChainId();
+
+        if (chainId !== 1) {
+          await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0x1" }],
+          });
+        }
+      }
+    };
+
+    changeChain();
   }, []);
 
   return (
