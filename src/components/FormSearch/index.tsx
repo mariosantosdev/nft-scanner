@@ -1,4 +1,4 @@
-import { Button, Flex, Link, Text } from "@chakra-ui/react";
+import { Button, Flex, Link, Text, useClipboard } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import web3 from "web3";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -26,6 +26,7 @@ const schema = yup.object().shape({
 
 export const FormSearch: React.FC = () => {
   const { getNfts, loading } = useNfts();
+  const { onCopy } = useClipboard("0xD472B0798421159999E3dB0Aaa2D53bC0D7aCfa3");
 
   const {
     register,
@@ -39,6 +40,11 @@ export const FormSearch: React.FC = () => {
   const onSubmit: SubmitHandler<FormData> = async ({ address }) => {
     resetField("address");
     await getNfts(address);
+  };
+
+  const copyExampleAddress = () => {
+    onCopy();
+    toast.success("Copied to clipboard");
   };
 
   useEffect(() => {
@@ -76,6 +82,18 @@ export const FormSearch: React.FC = () => {
           Search
         </Button>
       </Flex>
+
+      <Text>
+        Example Address: {""}
+        <Text
+          as="span"
+          role="button"
+          color="pink.500"
+          onClick={copyExampleAddress}
+        >
+          0xD472B0798421159999E3dB0Aaa2D53bC0D7aCfa3
+        </Text>
+      </Text>
     </Flex>
   );
 };
