@@ -1,7 +1,6 @@
 import { Container, Flex } from "@chakra-ui/react";
-import { Logo } from "~/components/Logo";
 
-import { AddressBar } from "./AddressBar";
+import { Logo } from "~/components/Logo";
 
 export const Header: React.FC = () => {
   return (
@@ -15,7 +14,6 @@ export const Header: React.FC = () => {
         justifyContent="space-between"
       >
         <Logo />
-        <AddressBar />
       </Container>
     </Flex>
   );
